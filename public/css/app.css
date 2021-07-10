@@ -1,4 +1,30 @@
-body{
-    background: red;
+#custom-handle {
+    width: 3em;
+    height: 1.6em;
+    top: 50%;
+    margin-top: -.8em;
+    text-align: center;
+    line-height: 1.6em;
+}
+
+#settings_block {
+    border: 1px solid grey;
+    display: flex;
+    min-height: 200px;
+    padding: 15px;
+}
+
+.list {
+    width: 30%;
+}
+
+.range {
+    width: 70%;
+}
+
+#result_block {
+    margin-top: 20px;
+    border: 1px solid grey;
+    padding: 15px;
 }
 

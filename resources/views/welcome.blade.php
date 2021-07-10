@@ -9,7 +9,25 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
 <body>
-<h1>Hello</h1>
+<div id="settings_block">
+    <div class="list">
+        <label for="places_list">Select a speed</label>
+        <select name="places_list" id="places_list">
+            @foreach($places as $place)
+                <option value="{{$place['id']}}">{{$place['title']}}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="range">
+        <div id="slider">
+            <div id="custom-handle" class="ui-slider-handle"></div>
+        </div>
+    </div>
+</div>
+<div id="result_block">
+
+</div>
+
 
 <script src="{{mix('js/app.js')}}"></script>
 </body>

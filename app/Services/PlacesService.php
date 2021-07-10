@@ -36,13 +36,27 @@ class PlacesService
         return $this->filterByRealDistance($target_place, $primary_results, $range);
     }
 
-    private function filterByRealDistance(Place $target, array $list, int $range): array
+    private function filterByRealDistance(Place $target, array $full_list, int $range): array
     {
+        $list = $this->addDistanceToList($target, $full_list);
+
         $filtered = collect($list)->filter(function ($item) use ($target, $range) {
-            return $this->calculateDistance($target['lat'], $target['lng'], $item['lat'], $item['lng']) <= $range;
+            return $item['distance'] <= $range;
         });
 
         return $filtered->toArray();
+    }
+
+    private function addDistanceToList(Place $target, array $list): array
+    {
+        $list = collect($list)->map(function ($item) use ($target) {
+            $item['distance'] = $this->calculateDistance($target['lat'], $target['lng'], $item['lat'], $item['lng']);
+            return $item;
+        });
+
+        $sorted = $list->sortBy('distance');
+
+        return $sorted->values()->all();
     }
 
     /**
